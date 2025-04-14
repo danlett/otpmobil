@@ -1,17 +1,16 @@
-package hu.danlett.otpmobil
+package hu.danlett.otpmobil.ui.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
+import hu.danlett.otpmobil.HiltTest
+import hu.danlett.otpmobil.ui.components.HomeScreen
 import hu.danlett.otpmobil.ui.theme.OtpMobilAppTheme
 import javax.inject.Inject
 
@@ -26,12 +25,7 @@ class HomeActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             OtpMobilAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                HomeScreen()
             }
         }
         hiltTest.testMethod()

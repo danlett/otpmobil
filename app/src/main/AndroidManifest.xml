@@ -14,7 +14,7 @@
         android:theme="@style/Theme.OtpMobilApp"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.view.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.OtpMobilApp">
             <intent-filter>
