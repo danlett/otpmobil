@@ -1,11 +1,15 @@
 package hu.danlett.otpmobil.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.danlett.otpmobil.domain.picture.gateway.NetworkPictureGateway
 import hu.danlett.otpmobil.ui.state.HomeUiState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +25,9 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fetchFirstPicturePage() {
-
+        viewModelScope.launch(Dispatchers.IO) {
+            val photos = networkPictureGateway.getPhotos("dog", 1)
+            Timber.e(photos.toString())
+        }
     }
 }

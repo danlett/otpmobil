@@ -1,5 +1,7 @@
 package hu.danlett.otpmobil.network.picture.gateway
 
+import hu.danlett.otpmobil.domain.Constants.FLICKR_API_KEY
+import hu.danlett.otpmobil.domain.Constants.FLICKR_IMAGE_BASE_URL
 import hu.danlett.otpmobil.domain.picture.gateway.NetworkPictureGateway
 import hu.danlett.otpmobil.domain.picture.model.Photo
 import hu.danlett.otpmobil.network.api.ApiFlickr
@@ -8,6 +10,7 @@ import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestEmptyResult
 import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestError
 import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestResult
 import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestSuccess
+import timber.log.Timber
 import javax.inject.Inject
 
 class NetworkPictureGatewayImpl @Inject constructor(
@@ -41,7 +44,8 @@ class NetworkPictureGatewayImpl @Inject constructor(
             } else {
                 NetworkPhotosRequestError
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Timber.e(e)
             return NetworkPhotosRequestError
         }
     }
@@ -61,10 +65,8 @@ class NetworkPictureGatewayImpl @Inject constructor(
 
     companion object {
         private const val PHOTO_SEARCH_METHOD = "flickr.photos.search"
-        private const val FLICKR_API_KEY = "65803e8f6e4a3982200621cad356be51"
         private const val FLICKR_API_FORMAT = "json"
         private const val FLICKR_API_NO_JSON_CALLBACK = 1
         private const val PER_PAGE = 20
-        private const val FLICKR_IMAGE_BASE_URL = "https://live.staticflickr.com"
     }
 }

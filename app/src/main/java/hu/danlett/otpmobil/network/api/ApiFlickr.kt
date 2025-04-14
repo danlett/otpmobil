@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiFlickr {
-    @GET("")
+    @GET("rest/")
     suspend fun getPhotos(
         @Query("method") method: String,
         @Query("api_key") apiKey: String,
