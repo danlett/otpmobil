@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Próbafeladat - Kassai Dániel"
+rootProject.name = "OTPMobil - Kassai Dániel"
 include(":app")
  
