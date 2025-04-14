@@ -16,7 +16,7 @@ import hu.danlett.otpmobil.ui.theme.OtpMobilAppTheme
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
 
     @Inject
     lateinit var hiltTest: HiltTest
