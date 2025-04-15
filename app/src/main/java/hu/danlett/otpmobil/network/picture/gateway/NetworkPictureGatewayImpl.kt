@@ -63,6 +63,7 @@ class NetworkPictureGatewayImpl @Inject constructor(
             return Photo(
                 id = it.id,
                 imageUrl = "${FLICKR_IMAGE_BASE_URL}/${it.server}/${it.id}_${it.secret}_b.jpg",
+                thumbUrl = "${FLICKR_IMAGE_BASE_URL}/${it.server}/${it.id}_${it.secret}_n.jpg",
                 title = it.title ?: ""
             )
         }

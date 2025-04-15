@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class Photo(
     val id: String,
     val imageUrl: String,
+    val thumbUrl: String,
     val title: String
 ) : Parcelable

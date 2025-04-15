@@ -28,7 +28,7 @@ fun PhotoThumbnail(
 			.clickable(
 				onClick = { onPhotoClicked(photo) }
 			),
-		model = photo.imageUrl,
+		model = photo.thumbUrl,
 		contentDescription = stringResource(id = R.string.image_thumbnail_content_description),
 		error = painterResource(
 			id = R.drawable.image_24px,
