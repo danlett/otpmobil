@@ -5,4 +5,8 @@
     <string name="image_thumbnail_content_description">Bélyegkép</string>
     <string name="no_results">Nincs találat, próbáld meg pontosítani a kifejezést.</string>
     <string name="error_placeholder">Nem sikerült betölteni a képeket, kérjük próbáld újra.</string>
+    <string name="back_content_description">Vissza</string>
+    <string name="details_description">Kép részletei</string>
+    <string name="image_title">Kép címe: %1$s</string>
+    <string name="image_id">Kép azonosítója: %1$s</string>
 </resources>
