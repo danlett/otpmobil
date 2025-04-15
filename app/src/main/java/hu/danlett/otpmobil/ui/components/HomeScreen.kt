@@ -11,11 +11,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import hu.danlett.otpmobil.R
 import hu.danlett.otpmobil.ui.viewmodel.HomeViewModel
 
@@ -24,7 +24,7 @@ import hu.danlett.otpmobil.ui.viewmodel.HomeViewModel
 fun HomeScreen(
     viewModel: HomeViewModel
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -43,9 +43,12 @@ fun HomeScreen(
         ) {
             val textFieldState = rememberTextFieldState()
 
-            CustomSearchBar(textFieldState) { }
+            CustomSearchBar(
+                textFieldState = textFieldState,
+                onSearch = viewModel::onSearchQueryChanged
+            )
 
-            PhotosList(uiState.listState)
+            PhotosList(uiState.listState, viewModel::onLoadMore)
         }
     }
 }

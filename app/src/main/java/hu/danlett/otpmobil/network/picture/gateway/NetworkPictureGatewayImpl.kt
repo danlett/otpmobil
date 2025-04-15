@@ -38,14 +38,19 @@ class NetworkPictureGatewayImpl @Inject constructor(
             val photos = response.data?.photos?.mapNotNull {
                 mapPhoto(it)
             }
+            val pages = response.data?.pages
 
-            return if (photos != null) {
-                NetworkPhotosRequestSuccess(photos)
+            return if (photos != null && pages != null) {
+                NetworkPhotosRequestSuccess(
+                    photos = photos,
+                    page = page,
+                    hasMore = page < pages
+                )
             } else {
                 NetworkPhotosRequestError
             }
         } catch (e: Exception) {
-            Timber.e(e)
+            Timber.d(e)
             return NetworkPhotosRequestError
         }
     }
