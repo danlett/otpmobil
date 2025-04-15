@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
-    fun onActivityStarted() {
+    fun onActivityOnCreate() {
         reloadList("dog")
     }
 

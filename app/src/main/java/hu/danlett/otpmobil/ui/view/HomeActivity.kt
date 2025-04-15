@@ -41,11 +41,8 @@ class HomeActivity : ComponentActivity() {
                 }
             }
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.onActivityStarted()
+        viewModel.onActivityOnCreate()
     }
 
     private fun navigateToDetailScreen(photo: Photo) {
