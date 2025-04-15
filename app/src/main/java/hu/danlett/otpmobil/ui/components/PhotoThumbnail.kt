@@ -24,7 +24,7 @@ fun PhotoThumbnail(
 	AsyncImage(
 		modifier = Modifier
 			.aspectRatio(1f)
-			.clip(RoundedCornerShape(4.dp))
+			.clip(RoundedCornerShape(12.dp))
 			.clickable(
 				onClick = { onPhotoClicked(photo) }
 			),

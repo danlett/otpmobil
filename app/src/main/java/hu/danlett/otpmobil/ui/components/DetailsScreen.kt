@@ -1,6 +1,5 @@
 package hu.danlett.otpmobil.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,8 +12,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -37,31 +36,28 @@ fun DetailsScreen(
 	Scaffold(
 		modifier = Modifier.fillMaxSize(),
 		topBar = {
-			Surface(shadowElevation = 4.dp) {
-				TopAppBar(
-					title = { Text(text = photo.title) },
-					navigationIcon = {
-						IconButton(onClick = onBackClick) {
-							Icon(
-								imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-								contentDescription = stringResource(id = R.string.back_content_description),
-							)
-						}
-					})
-			}
+			TopAppBar(
+				title = { Text(text = stringResource(R.string.details_title)) },
+				navigationIcon = {
+					IconButton(onClick = onBackClick) {
+						Icon(
+							imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+							contentDescription = stringResource(id = R.string.back_content_description),
+						)
+					}
+				})
 		}
 	) { innerPadding ->
 		Column(
 			modifier = Modifier
 				.padding(innerPadding)
 				.fillMaxSize()
-				.padding(16.dp),
-			verticalArrangement = Arrangement.spacedBy(16.dp)
+				.padding(16.dp)
 		) {
 			AsyncImage(
 				modifier = Modifier
 					.aspectRatio(1f)
-					.clip(RoundedCornerShape(4.dp)),
+					.clip(RoundedCornerShape(12.dp)),
 				model = photo.imageUrl,
 				contentDescription = stringResource(id = R.string.image_thumbnail_content_description),
 				error = painterResource(
@@ -72,13 +68,20 @@ fun DetailsScreen(
 
 			Card(
 				modifier = Modifier
-					.padding(top = 6.dp)
-					.fillMaxWidth()
+					.padding(top = 16.dp)
+					.fillMaxWidth(),
+				shape = RoundedCornerShape(12.dp)
 			) {
-				Column {
-					Text(text = stringResource(R.string.details_description))
+				Column(modifier = Modifier.padding(16.dp)) {
+					Text(
+						text = stringResource(R.string.details_description),
+						style = MaterialTheme.typography.titleMedium
+					)
 
-					Text(text = stringResource(R.string.image_title, photo.title))
+					Text(
+						modifier = Modifier.padding(top = 16.dp),
+						text = stringResource(R.string.image_title, photo.title)
+					)
 
 					Text(text = stringResource(R.string.image_id, photo.id))
 				}
