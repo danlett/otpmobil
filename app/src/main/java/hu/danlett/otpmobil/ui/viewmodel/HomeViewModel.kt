@@ -40,7 +40,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) {
-        reloadList(query)
+        if (query.isNotBlank()) {
+            reloadList(query)
+        }
     }
 
     private fun reloadList(query: String) {
