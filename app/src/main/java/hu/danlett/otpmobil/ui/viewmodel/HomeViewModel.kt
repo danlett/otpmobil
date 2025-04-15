@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.danlett.otpmobil.domain.picture.gateway.NetworkPictureGateway
 import hu.danlett.otpmobil.domain.picture.model.Photo
+import hu.danlett.otpmobil.domain.settings.gateway.LocalSettingsGateway
 import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestEmptyResult
 import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestSuccess
 import hu.danlett.otpmobil.ui.state.Empty
@@ -23,14 +24,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val networkPictureGateway: NetworkPictureGateway
+    private val networkPictureGateway: NetworkPictureGateway,
+    private val localSettingsGateway: LocalSettingsGateway
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
     fun onActivityOnCreate() {
-        reloadList("dog")
+        val query = localSettingsGateway.getSavedSearchQuery() ?: DEFAULT_QUERY
+        reloadList(query)
     }
 
     fun onLoadMore() {
@@ -43,6 +46,7 @@ class HomeViewModel @Inject constructor(
 
     fun onSearchQueryChanged(query: String) {
         if (query.isNotBlank()) {
+            localSettingsGateway.storeSearchQuery(query)
             reloadList(query)
         }
     }
@@ -106,5 +110,9 @@ class HomeViewModel @Inject constructor(
 
         val photoList = (uiState.value.listState as? Initialized)?.photos ?: listOf<Photo>()
         return photoList + photos
+    }
+
+    companion object {
+        private const val DEFAULT_QUERY = "dog"
     }
 }
