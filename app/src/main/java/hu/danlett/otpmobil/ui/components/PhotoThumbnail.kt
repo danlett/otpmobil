@@ -1,5 +1,7 @@
 package hu.danlett.otpmobil.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -13,14 +15,19 @@ import coil.compose.AsyncImage
 import hu.danlett.otpmobil.R
 import hu.danlett.otpmobil.domain.picture.model.Photo
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PhotoThumbnail(
-	photo: Photo
+	photo: Photo,
+	onPhotoClicked: (Photo) -> Unit = {},
 ) {
 	AsyncImage(
 		modifier = Modifier
 			.aspectRatio(1f)
-			.clip(RoundedCornerShape(4.dp)),
+			.clip(RoundedCornerShape(4.dp))
+			.clickable(
+				onClick = { onPhotoClicked(photo) }
+			),
 		model = photo.imageUrl,
 		contentDescription = stringResource(id = R.string.image_thumbnail_content_description),
 		error = painterResource(

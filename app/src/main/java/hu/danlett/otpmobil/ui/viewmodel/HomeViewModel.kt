@@ -10,7 +10,9 @@ import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestSuccess
 import hu.danlett.otpmobil.ui.state.Empty
 import hu.danlett.otpmobil.ui.state.Error
 import hu.danlett.otpmobil.ui.state.HomeUiState
+import hu.danlett.otpmobil.ui.state.Idle
 import hu.danlett.otpmobil.ui.state.Initialized
+import hu.danlett.otpmobil.ui.state.NavigateToDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,6 +47,22 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onPhotoClicked(photo: Photo) {
+        _uiState.update {
+            it.copy(
+                navigationState = NavigateToDetail(photo)
+            )
+        }
+    }
+
+    fun onNavigationStarted() {
+        _uiState.update {
+            it.copy(
+                navigationState = Idle
+            )
+        }
+    }
+
     private fun reloadList(query: String) {
         // Flickr API uses 1-based indexing
         loadPage(query, 1)
@@ -53,7 +71,7 @@ class HomeViewModel @Inject constructor(
     private fun loadPage(query: String, page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val result = networkPictureGateway.getPhotos(query, page)
-            Timber.e(result.toString())
+            Timber.d(result.toString())
             if (result is NetworkPhotosRequestSuccess) {
                 _uiState.update {
                     it.copy(

@@ -48,7 +48,7 @@ fun HomeScreen(
                 onSearch = viewModel::onSearchQueryChanged
             )
 
-            PhotosList(uiState.listState, viewModel::onLoadMore)
+            PhotosList(uiState.listState, viewModel::onLoadMore, viewModel::onPhotoClicked)
         }
     }
 }

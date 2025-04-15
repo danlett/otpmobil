@@ -20,10 +20,11 @@ import hu.danlett.otpmobil.ui.state.PhotoListState
 @Composable
 fun PhotosList(
 	photosListState: PhotoListState,
-	onLoadMore: () -> Unit
+	onLoadMore: () -> Unit,
+	onPhotoClicked: (Photo) -> Unit = {}
 ) {
 	when (photosListState) {
-		is Initialized -> PhotosGrid(photosListState.photos, onLoadMore)
+		is Initialized -> PhotosGrid(photosListState.photos, onLoadMore, onPhotoClicked)
 		is Empty -> EmptyPlaceholder()
 		else -> ErrorPlaceholder()
 	}
@@ -33,6 +34,7 @@ fun PhotosList(
 fun PhotosGrid(
 	photos: List<Photo>,
 	onLoadMore: () -> Unit,
+	onPhotoClicked: (Photo) -> Unit = {}
 ) {
 	val listState = rememberLazyGridState()
 
@@ -53,7 +55,7 @@ fun PhotosGrid(
 		state = listState
 	) {
 		items(photos.size) { index ->
-			PhotoThumbnail(photos[index])
+			PhotoThumbnail(photos[index], onPhotoClicked)
 		}
 	}
 }
