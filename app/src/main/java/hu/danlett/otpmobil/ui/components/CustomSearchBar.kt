@@ -1,7 +1,7 @@
 package hu.danlett.otpmobil.ui.components
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -23,9 +23,8 @@ fun CustomSearchBar(
 	onSearch: (String) -> Unit
 ) {
 	SearchBar(
-		modifier = Modifier
-			.fillMaxWidth()
-			.padding(horizontal = 16.dp),
+		windowInsets = WindowInsets(top = 0.dp),
+		modifier = Modifier.fillMaxWidth(),
 		inputField = {
 			SearchBarDefaults.InputField(
 				query = textFieldState.text.toString(),
