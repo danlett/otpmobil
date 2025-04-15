@@ -75,4 +75,5 @@ dependencies {
     implementation(libs.retrofit.gson)
     implementation(libs.timber)
     implementation(libs.coil)
+    implementation(libs.zoomable)
 }

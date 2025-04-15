@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import hu.danlett.otpmobil.R
 import hu.danlett.otpmobil.domain.picture.model.Photo
+import net.engawapg.lib.zoomable.rememberZoomState
+import net.engawapg.lib.zoomable.zoomable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +59,8 @@ fun DetailsScreen(
 			AsyncImage(
 				modifier = Modifier
 					.aspectRatio(1f)
-					.clip(RoundedCornerShape(12.dp)),
+					.clip(RoundedCornerShape(12.dp))
+					.zoomable(rememberZoomState()),
 				model = photo.imageUrl,
 				contentDescription = stringResource(id = R.string.image_thumbnail_content_description),
 				error = painterResource(
