@@ -4,14 +4,17 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import hu.danlett.otpmobil.R
 import hu.danlett.otpmobil.ui.theme.OtpMobilAppTheme
 
@@ -21,7 +24,9 @@ fun HomeScreen() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = { Text(text = stringResource(R.string.app_name)) })
+            Surface(shadowElevation = 4.dp) {
+                TopAppBar(title = { Text(text = stringResource(R.string.home_title)) })
+            }
         }
     ) { innerPadding ->
         Column(
@@ -29,7 +34,9 @@ fun HomeScreen() {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
+            val textFieldState = rememberTextFieldState()
 
+            CustomSearchBar(textFieldState) { }
         }
     }
 }
