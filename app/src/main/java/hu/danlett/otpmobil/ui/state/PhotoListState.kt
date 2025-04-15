@@ -11,3 +11,4 @@ data class Initialized(
 	val query: String
 ) : PhotoListState
 object Empty : PhotoListState
+object Error : PhotoListState

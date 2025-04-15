@@ -5,7 +5,10 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.danlett.otpmobil.domain.picture.gateway.NetworkPictureGateway
 import hu.danlett.otpmobil.domain.picture.model.Photo
+import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestEmptyResult
 import hu.danlett.otpmobil.network.picture.model.NetworkPhotosRequestSuccess
+import hu.danlett.otpmobil.ui.state.Empty
+import hu.danlett.otpmobil.ui.state.Error
 import hu.danlett.otpmobil.ui.state.HomeUiState
 import hu.danlett.otpmobil.ui.state.Initialized
 import kotlinx.coroutines.Dispatchers
@@ -58,6 +61,18 @@ class HomeViewModel @Inject constructor(
                             hasMore = result.hasMore,
                             query = query
                         )
+                    )
+                }
+            } else if (result is NetworkPhotosRequestEmptyResult) {
+                _uiState.update {
+                    it.copy(
+                        listState = Empty
+                    )
+                }
+            } else {
+                _uiState.update {
+                    it.copy(
+                        listState = Error
                     )
                 }
             }

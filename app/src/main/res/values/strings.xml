@@ -3,4 +3,6 @@
     <string name="home_title">Képek keresése</string>
     <string name="search_placeholder">Keresés a képek között</string>
     <string name="image_thumbnail_content_description">Bélyegkép</string>
+    <string name="no_results">Nincs találat, próbáld meg pontosítani a kifejezést.</string>
+    <string name="error_placeholder">Nem sikerült betölteni a képeket, kérjük próbáld újra.</string>
 </resources>
