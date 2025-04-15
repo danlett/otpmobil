@@ -20,7 +20,7 @@ class HomeActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             OtpMobilAppTheme {
-                HomeScreen()
+                HomeScreen(viewModel)
             }
         }
     }

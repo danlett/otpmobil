@@ -2,4 +2,5 @@
     <string name="app_name">OTPMobil - Kassai Dániel</string>
     <string name="home_title">Képek keresése</string>
     <string name="search_placeholder">Adj meg keresési kifejezést!</string>
+    <string name="image_thumbnail_content_description">Bélyegkép</string>
 </resources>
