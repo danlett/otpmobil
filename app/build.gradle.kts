@@ -76,4 +76,6 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.coil)
     implementation(libs.zoomable)
+    testImplementation(libs.mockito)
+    testImplementation(libs.mockito.kotlin)
 }
