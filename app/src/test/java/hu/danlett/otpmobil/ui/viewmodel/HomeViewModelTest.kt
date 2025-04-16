@@ -1,0 +1,91 @@
+package hu.danlett.otpmobil.ui.viewmodel
+
+import hu.danlett.otpmobil.domain.Constants.FLICKR_IMAGE_BASE_URL
+import hu.danlett.otpmobil.domain.picture.gateway.NetworkPictureGateway
+import hu.danlett.otpmobil.domain.picture.model.Photo
+import hu.danlett.otpmobil.domain.settings.gateway.LocalSettingsGateway
+import hu.danlett.otpmobil.network.picture.model.NetworkPhoto
+import hu.danlett.otpmobil.network.picture.model.NetworkPhotos
+import hu.danlett.otpmobil.network.picture.model.NetworkPhotosResponse
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
+import org.junit.Rule
+import org.mockito.Mockito.mock
+import org.mockito.kotlin.whenever
+
+@OptIn(ExperimentalCoroutinesApi::class)
+class HomeViewModelTest {
+
+	@ExperimentalCoroutinesApi
+	@get:Rule
+	var mainCoroutineRule = MainCoroutineRule()
+
+	private val networkPictureGateway = mock<NetworkPictureGateway>()
+	private val localSettingsGateway = mock<LocalSettingsGateway>()
+	private val viewModel = HomeViewModel(networkPictureGateway, localSettingsGateway)
+
+
+	//@Test
+	// unfinished
+	fun `given on activity onCreate the list is initialized`() {
+		runTest {
+			givenQuerySaved()
+
+			viewModel.onActivityOnCreate()
+
+			advanceUntilIdle()
+
+			// unfinished
+		}
+	}
+
+	private fun givenQuerySaved() {
+		whenever(localSettingsGateway.getSavedSearchQuery()).thenReturn(SAVED_QUERY)
+	}
+
+	private suspend fun givenPhotosAvailableForQuery() {
+		//whenever(networkPictureGateway.getPhotos(SAVED_QUERY, 1)).thenReturn()
+	}
+
+	companion object {
+		private const val SAVED_QUERY = "dog"
+		private val NETWORK_PHOTO_1 = NetworkPhoto(
+			id = "id1", secret = "secret1", server = "server1", title = "title1",
+			owner = "owner1",
+			farm = 1,
+			isPublic = 1,
+			isFriend = 0,
+			isFamily = 0
+		)
+		private val PHOTO_1 = Photo(
+			id = "id1",
+			imageUrl = "${FLICKR_IMAGE_BASE_URL}/server1/id1_secret1_b.jpg",
+			thumbUrl = "${FLICKR_IMAGE_BASE_URL}/server1/id1_secret1_n.jpg",
+			title = "title1"
+		)
+		private val NETWORK_PHOTO_2 = NetworkPhoto(
+			id = "id2", secret = "secret2", server = "server2", title = "title2",
+			owner = "owner2",
+			farm = 1,
+			isPublic = 1,
+			isFriend = 0,
+			isFamily = 0
+		)
+		private val NETWORK_PHOTO_3 = NetworkPhoto(
+			id = "id3", secret = "secret3", server = "server3", title = "title3",
+			owner = "owner3",
+			farm = 1,
+			isPublic = 1,
+			isFriend = 0,
+			isFamily = 0
+		)
+		private val NETWORK_PHOTO_LIST = listOf(NETWORK_PHOTO_1, NETWORK_PHOTO_2, NETWORK_PHOTO_3)
+		private val NETWORK_PHOTOS_AVAILABLE = NetworkPhotos(NETWORK_PHOTO_LIST, 3)
+		private val NETWORK_PHOTOS_EMPTY = NetworkPhotos(listOf(), 0)
+		private val NETWORK_PHOTOS_AVAILABLE_RESPONSE =
+			NetworkPhotosResponse(NETWORK_PHOTOS_AVAILABLE)
+		private val NETWORK_PHOTOS_EMPTY_RESPONSE = NetworkPhotosResponse(NETWORK_PHOTOS_EMPTY)
+		private val NETWORK_PHOTOS_MALFORMED_RESPONSE = NetworkPhotosResponse(null)
+	}
+}

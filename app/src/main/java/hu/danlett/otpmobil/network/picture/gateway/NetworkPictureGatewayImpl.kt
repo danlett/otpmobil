@@ -16,6 +16,7 @@ import javax.inject.Inject
 class NetworkPictureGatewayImpl @Inject constructor(
     private val apiFlickr: ApiFlickr
 ) : NetworkPictureGateway {
+
     override suspend fun getPhotos(
         searchQuery: String?,
         page: Int

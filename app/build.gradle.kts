@@ -78,4 +78,5 @@ dependencies {
     implementation(libs.zoomable)
     testImplementation(libs.mockito)
     testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.coroutines.test)
 }
